@@ -9,13 +9,13 @@ library(lubridate)
 library(readxl)
 
 
-lqas <- read_csv("C:/Users/TOURE/Mes documents/REPOSITORIES/LQAS_raw_data/AFRO_LQAS_data_c.csv")
+# lqas <- read_csv("C:/Users/TOURE/Mes documents/REPOSITORIES/LQAS_raw_data/AFRO_LQAS_data_c.csv")
 polioutbrk <- read_excel("C:/Users/TOURE/Mes documents/REPOSITORIES/SCOPE/data.xlsx")
 calendar <- read_csv("C:/Users/TOURE/Mes documents/REPOSITORIES/SCOPE/calendar.csv")
 
-scpe$Country[scpe$Country == "CÔTE D’IVOIRE"] <- "COTE D IVOIRE"
+polioutbrk$Country[polioutbrk$Country == "CÔTE D’IVOIRE"] <- "COTE D IVOIRE"
 
-Polioutbrk<-scpe |>
+Polioutbrk<-polioutbrk |>
   rename(roundn = `Round Number`,
          response = `OBR Name`,
          vaccine.type = Vaccines,
@@ -49,7 +49,7 @@ calend<-calendar |>
   dplyr::select(country, province, district, response, vaccine.type, roundNumber) |> 
   filter(vaccine.type !="NA")
 calend$country[calend$country == "CÔTE D’IVOIRE"] <- "COTE D IVOIRE"
-Calendare <- merge(x=calend, y=polioutbrk,  
+Calendare <- merge(x=calend, y=Polioutbrk,  
                       by=c("country" = "country",
                            "response" = "response",
                            "roundNumber" = "roundNumber"),
